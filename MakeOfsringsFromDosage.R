@@ -1,5 +1,16 @@
 
-# Function to Simulate diploid F1 offsprings from dosage data from dosage data of diploid parents
+#' Create an F1 offspring based on the genotype of the parents.
+#'
+#' Given the genotype of a dam and a sire, this function simulates the production of one F1 offspring
+#' based on the principles of Mendelian genetics. The genotype of the offspring is determined by randomly
+#' selecting alleles from each parent, and follows the rules of dominance and recessiveness.
+#'
+#' @param dam A numeric vector of length n, containing the genotype of the dam in terms of dosage values (0, 1 or 2) without missing data.
+#' @param sir A numeric vector of length n, containing the genotype of the sire in terms of dosage values (0, 1 or 2) without missing data.
+#' @return A numeric vector of length n, containing the genotype of the F1 offspring in terms of dosage values (0, 1 or 2).
+#' @examples
+#' MakeOfspring(c(1,2,0), c(0,1,1))
+#' @export
 
 MakeOfspring = function(dam=c(0,1,2), sir=c(2,1,0)){
   ## Input : 
@@ -24,6 +35,21 @@ MakeOfspring = function(dam=c(0,1,2), sir=c(2,1,0)){
   return(Child)
 }
 
+#########################################################################################################3
+
+#' Create multiple F1 offspring based on the genotype of the parents.
+#'
+#' Given the genotype of a dam and a sire, this function simulates the production of multiple F1 offspring
+#' based on the principles of Mendelian genetics. The genotype of each offspring is determined by randomly
+#' selecting alleles from each parent, and follows the rules of dominance and recessiveness.
+#'
+#' @param dam A numeric vector of length n, containing the genotype of the dam in terms of dosage values (0, 1 or 2) without missing data.
+#' @param sir A numeric vector of length n, containing the genotype of the sire in terms of dosage values (0, 1 or 2) without missing data.
+#' @param nbOfsprings An integer specifying the number of F1 offspring to produce.
+#' @return A matrix of size n x nbOfsprings, containing the genotype of the F1 offspring in terms of dosage values (0, 1 or 2).
+#' @examples
+#' MakeManyOfsprings(c(1,2,0), c(0,1,1), nbOfsprings = 3)
+#' @export
 MakeManyOfsrprings = function(dam=c(0,1,2), sir=c(2,1,0), nbOfsprings = 2){
   ## Input : 
   ## dam / sir : vectors of dosage values (0, 1 or 2) wuthout missing data
@@ -35,15 +61,6 @@ MakeManyOfsrprings = function(dam=c(0,1,2), sir=c(2,1,0), nbOfsprings = 2){
   }
   return(Childs)
 }
-
-##### test Section #####
-
-Ind1 = sample(x = c(0,1,2), 10000, replace = TRUE)
-Ind2 = sample(x = c(0,1,2), 10000, replace = TRUE)
-
-MakeOfspring(Ind1, Ind2)
-MakeManyOfsrprings(Ind1, Ind2, 20)
-
 
 
 
