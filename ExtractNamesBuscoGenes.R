@@ -1,5 +1,10 @@
+#### Orginal version avaialble at https://github.com/cumtr/R_Recipes/edit/master/ExtractNamesBuscoGenes.R ####
 
-# Set working directry to the location of this script
+# This script retrieve the BUSCO genes present in a given annotation made by the NCBI.
+# The curent version retrieve the BUSCO genest for birds (aves_odb10) in the genome of the Barn Owl (GCF_018691265.1_T.alba_DEE_v4.0)
+
+#### Set working directry to the location of this script ####
+
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 
 #### Load the libraries ####
@@ -29,7 +34,7 @@ library(jsonlite)
 TableBusco = read.table("aves_odb10/links_to_ODB10.txt", sep = "\t", quote = "")
 Busco_ids = TableBusco[,1]
 
-# Loop over Busco IDs to extract the matching ID's in the Gallus gallus assembly
+# DO NOT USE /// Loop over Busco IDs to extract the matching ID's in the Gallus gallus assembly
 # GenesNames = c()
 # for(Busco_id in Busco_ids){
 #   print(Busco_id)
@@ -58,7 +63,7 @@ BUSCOgenesBarnOwl = GenesNamesAll[GenesNamesAll%in%GenesBarnOwl$V15]
 TabBUSCO_Owl = GenesBarnOwl[GenesBarnOwl$V15%in%BUSCOgenesBarnOwl,c(15, 7, 8, 9)]
 colnames(TabBUSCO_Owl) = c("GeneID", "Chr", "Start", "Stop")
 
+# Export a table with the gene ID and it's coordinates
 write.table(TabBUSCO_Owl, "BUSCOgenesBarnOwl.txt", row.names = FALSE, quote = FALSE)
 
-####  ####
-
+#### EOF ####
